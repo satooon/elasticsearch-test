@@ -1,0 +1,22 @@
+version: '3'
+services:
+  elasticsearch:
+    build: ./docker/elasticsearch
+    volumes:
+    - ./docker/elasticsearch/config:/usr/share/elasticsearch/config
+    ports:
+    - 9200:9200
+    expose:
+    - 9300
+    environment:
+    - discovery.type=single-node
+    ulimits:
+      nofile:
+        soft: 65536
+        hard: 65536
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.4.2
+    depends_on:
+    - elasticsearch
+    ports:
+    - 5601:5601
