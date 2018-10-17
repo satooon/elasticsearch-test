@@ -2,3 +2,4 @@
 *.keystore
 vendor
 .env
+*/test/*.mp3
